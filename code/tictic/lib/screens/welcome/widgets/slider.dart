@@ -3,11 +3,10 @@ import 'package:tictic/constants/colors.dart';
 import 'package:tictic/screens/welcome/widgets/bullet.dart';
 import 'package:tictic/screens/welcome/widgets/text_slide.dart';
 
-import '../../../constants/fonts.dart';
 import '../../../constants/sizes.dart';
 
 class Slider extends StatefulWidget {
-  Slider({super.key});
+  const Slider({super.key});
 
   @override
   State<Slider> createState() => _SliderState();
@@ -38,7 +37,6 @@ class _SliderState extends State<Slider> {
               });
             },
             controller: _pageController,
-            pageSnapping: true,
             itemCount: _items.length,
             itemBuilder: (context, index) {
               return TextSlide(text: _items[index]);

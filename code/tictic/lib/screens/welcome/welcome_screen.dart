@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictic/screens/main/main_screen.dart';
 import 'package:tictic/screens/welcome/widgets/logo.dart';
 import 'widgets/slider.dart' as my_slider;
 import '../../constants/sizes.dart';
@@ -22,10 +23,25 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Spacer(),
               Logo(),
+              Spacer(),
               SizedBox(height: kVerticalPaddingL),
               my_slider.Slider(),
-
+              Spacer(),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MainScreen();
+                      },
+                    ),
+                  );
+                },
+                child: Text("Continuer sans compte"),
+              ),
             ],
           ),
         ),
