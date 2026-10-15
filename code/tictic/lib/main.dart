@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tictic/constants/colors.dart';
+import 'package:tictic/routes.dart';
 import 'package:tictic/screens/welcome/welcome_screen.dart';
 
 void main() {
@@ -11,6 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'TicTic', theme: appTheme, home: WelcomeScreen());
+    return MaterialApp(
+      title: 'TicTic',
+      theme: appTheme,
+      home: WelcomeScreen(),
+      initialRoute: WelcomeScreen.routeName,
+      routes: routes,
+    );
   }
 }

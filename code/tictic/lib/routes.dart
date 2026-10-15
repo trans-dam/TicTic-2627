@@ -1,0 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:tictic/screens/main/main_screen.dart' show MainScreen;
+import 'package:tictic/screens/welcome/welcome_screen.dart';
+
+Map<String, Widget Function(BuildContext)> routes = {
+  WelcomeScreen.routeName: (context) => WelcomeScreen(),
+  MainScreen.routeName: (context) => MainScreen(),
+};

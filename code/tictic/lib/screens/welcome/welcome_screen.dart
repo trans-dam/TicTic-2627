@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tictic/screens/main/main_screen.dart';
 import 'package:tictic/screens/welcome/widgets/logo.dart';
+
 import 'widgets/slider.dart' as my_slider;
 import '../../constants/sizes.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+
+  static String routeName = '/welcome';
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +34,7 @@ class WelcomeScreen extends StatelessWidget {
               Spacer(),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return MainScreen();
-                      },
-                    ),
-                  );
+                  Navigator.pushNamed(context, MainScreen.routeName);
                 },
                 child: Text("Continuer sans compte"),
               ),

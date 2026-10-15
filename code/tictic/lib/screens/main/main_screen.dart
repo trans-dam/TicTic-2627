@@ -6,6 +6,8 @@ import 'home/home.dart';
 class MainScreen extends StatefulWidget {
   MainScreen({super.key});
 
+  static String routeName = '/main';
+
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
