@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tictic/screens/main/main_screen.dart';
+import 'package:tictic/screens/register/register_screen.dart';
 import 'package:tictic/screens/welcome/widgets/logo.dart';
+import 'package:tictic/screens/welcome/widgets/text_diver.dart';
 
 import 'widgets/slider.dart' as my_slider;
 import '../../constants/sizes.dart';
@@ -37,6 +39,15 @@ class WelcomeScreen extends StatelessWidget {
                   Navigator.pushNamed(context, MainScreen.routeName);
                 },
                 child: Text("Continuer sans compte"),
+              ),
+              SizedBox(height: kVerticalPadding),
+              TextDiver(text: 'Ou'),
+              SizedBox(height: kVerticalPadding),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, RegisterScreen.routeName);
+                },
+                child: Text('Créer un compte'),
               ),
             ],
           ),
