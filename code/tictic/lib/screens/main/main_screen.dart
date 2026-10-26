@@ -4,7 +4,7 @@ import 'package:tictic/screens/main/settings/settings.dart';
 import 'home/home.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({super.key});
+  const MainScreen({super.key});
 
   static String routeName = '/main';
 

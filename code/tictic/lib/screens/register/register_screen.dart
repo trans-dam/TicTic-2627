@@ -1,8 +1,10 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:tictic/constants/sizes.dart';
 import 'package:tictic/screens/main/main_screen.dart';
-import 'package:tictic/widgets/form/input_field.dart';
+
+import '../../widgets/form/email_field.dart';
+import '../../widgets/form/password_field.dart';
+import '../../widgets/form/username_field.dart';
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({super.key});
@@ -33,35 +35,12 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  InputField(
-                    label: 'Votre nom :',
-                    hintText: '',
-                    validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          value.trim().length < 2) {
-                        return 'Il faut renseigner une valeur pour le champ nom';
-                      }
-                      return null;
-                    },
-                  ),
+                  UsernameField(),
                   SizedBox(height: kVerticalPaddingL),
-                  InputField(
-                    keyboardType: TextInputType.emailAddress,
-                    label: 'Votre e-mail:',
-                    hintText: '',
-                    validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          value.trim().length < 2) {
-                        return 'Il faut renseigner une valeur pour le champ email';
-                      }
-                      if (!EmailValidator.validate(value)) {
-                        return 'Le champ email n’est pas valide';
-                      }
-                      return null;
-                    },
-                  ),
+                  EmailField(),
+                  SizedBox(height: kVerticalPaddingL),
+                  PasswordField(),
+                  SizedBox(height: kVerticalPaddingL),
                   ElevatedButton(
                     onPressed: () {
                       if (_registerFormKey.currentState!.validate()) {
@@ -77,6 +56,5 @@ class RegisterScreen extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
