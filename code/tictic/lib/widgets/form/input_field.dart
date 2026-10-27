@@ -10,6 +10,7 @@ class InputField extends StatelessWidget {
     this.obscureText = false,
     required this.label,
     required this.hintText,
+    this.controller,
   });
 
   final String? Function(String?)? validator;
@@ -18,15 +19,18 @@ class InputField extends StatelessWidget {
   final String hintText;
   final TextInputType? keyboardType;
   final bool obscureText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: keyboardType,
       obscureText: obscureText,
+      controller: controller,
       decoration: InputDecoration(
         label: Text(label, style: kLabelStyle),
         hintText: hintText,
+        hintStyle: kHintStyle,
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: validator,

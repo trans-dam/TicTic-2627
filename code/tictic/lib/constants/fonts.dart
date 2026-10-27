@@ -19,9 +19,8 @@ const kSmallText =
     TextStyle(color: kMainColor, fontWeight: FontWeight.w500, fontSize: 13);
 
 const kButtonTextStyle = TextStyle(
-    color: kMainColor,
     fontWeight: FontWeight.w600,
-    fontSize: 20);
+    fontSize: 16);
 
 const kErrorStyle = TextStyle(
   color: kErrorColor,
@@ -30,6 +29,8 @@ const kErrorStyle = TextStyle(
 );
 const kHintStyle = TextStyle(
   fontStyle: FontStyle.italic,
+  color: kGreyColor,
+  fontSize: 14,
 );
 const kTitleSideBar = TextStyle(
   fontWeight: FontWeight.w600,

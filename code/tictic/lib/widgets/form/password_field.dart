@@ -1,10 +1,11 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'input_field.dart';
 
 class PasswordField extends StatelessWidget {
-  const PasswordField({super.key});
+  const PasswordField({super.key, this.controller});
+
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class PasswordField extends StatelessWidget {
         }
         return null;
       },
+      controller: controller,
     );
   }
 }

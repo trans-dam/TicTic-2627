@@ -8,6 +8,7 @@ const kTertiaryColor = Color.fromRGBO(163, 177, 138, 1);
 const kBackgroundColor = Color.fromRGBO(242, 239, 228, 1);
 const kBackgroundColorCard = Colors.white;
 const kErrorColor = Color.fromRGBO(238, 99, 82, 1);
+const kGreyColor = Color.fromRGBO(102, 102, 102, 1.0);
 
 final kShadow = BoxShadow(
   color: Colors.black.withValues(alpha: 0.1),

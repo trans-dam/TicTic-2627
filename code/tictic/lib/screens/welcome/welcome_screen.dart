@@ -4,6 +4,7 @@ import 'package:tictic/screens/register/register_screen.dart';
 import 'package:tictic/screens/welcome/widgets/logo.dart';
 import 'package:tictic/screens/welcome/widgets/text_diver.dart';
 
+import '../register/login_screen.dart';
 import 'widgets/slider.dart' as my_slider;
 import '../../constants/sizes.dart';
 
@@ -43,11 +44,36 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(height: kVerticalPadding),
               TextDiver(text: 'Ou'),
               SizedBox(height: kVerticalPadding),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, RegisterScreen.routeName);
-                },
-                child: Text('Créer un compte'),
+              LayoutBuilder(
+                builder: (context, constraints) => SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minWidth: constraints.maxWidth),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                RegisterScreen.routeName,
+                              );
+                            },
+                            child: Text('Créer un compte'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, LoginScreen.routeName);
+                            },
+                            child: Text('Se connecter'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
