@@ -1,25 +1,35 @@
-import 'package:flutter/foundation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tictic/constants/colors.dart';
 import 'package:tictic/constants/sizes.dart';
 import 'package:tictic/screens/main/main_screen.dart';
 import 'package:tictic/screens/welcome/widgets/logo.dart';
+import 'package:tictic/widgets/error_message.dart';
 
 import '../../widgets/form/email_field.dart';
 import '../../widgets/form/password_field.dart';
 import '../../widgets/form/username_field.dart';
-import 'login_screen.dart';
+import '../login/login_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  RegisterScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   static String routeName = '/register';
 
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final _registerFormKey = GlobalKey<FormState>();
 
   final usernameController = TextEditingController();
+
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
+
+  late String message = "";
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +67,36 @@ class RegisterScreen extends StatelessWidget {
                   SizedBox(height: kVerticalPaddingL),
                   PasswordField(controller: passwordController),
                   SizedBox(height: kVerticalPaddingL),
+                  ErrorMessage(message: message),
+                  SizedBox(height: kVerticalPaddingL),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_registerFormKey.currentState!.validate()) {
-                        if (kDebugMode) {
-                          print(usernameController.text);
-                          print(emailController.text);
-                          print(passwordController.text);
+                        try {
+                          await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
+
+                          if (!context.mounted) return;
+                          Navigator.pushNamed(context, MainScreen.routeName);
+                        } on FirebaseAuthException catch (e) {
+                          if (!context.mounted) return;
+                          setState(() {
+                            message = switch (e.code) {
+                              'email-already-in-use' =>
+                                'Cette adresse e-mail est déjà utilisée.',
+                              'invalid-email' => 'Adresse e-mail invalide.',
+                              'weak-password' =>
+                                'Le mot de passe est trop faible.',
+                              _ => 'La création du compte a échoué. Réessayez.',
+                            };
+                          });
                         }
-                        Navigator.pushNamed(context, MainScreen.routeName);
                       }
                     },
+
                     child: Text('Créer mon compte'),
                   ),
                   Spacer(),

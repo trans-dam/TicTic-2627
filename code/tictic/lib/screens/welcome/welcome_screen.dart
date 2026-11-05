@@ -4,7 +4,7 @@ import 'package:tictic/screens/register/register_screen.dart';
 import 'package:tictic/screens/welcome/widgets/logo.dart';
 import 'package:tictic/screens/welcome/widgets/text_diver.dart';
 
-import '../register/login_screen.dart';
+import '../login/login_screen.dart';
 import 'widgets/slider.dart' as my_slider;
 import '../../constants/sizes.dart';
 

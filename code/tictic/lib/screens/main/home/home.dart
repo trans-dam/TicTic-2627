@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tictic/screens/welcome/welcome_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -9,11 +11,13 @@ class Home extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Center(child: Text("On est sur l’écran main..")),
+        Center(child: Text(FirebaseAuth.instance.currentUser!.email ?? 'Rien')),
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            FirebaseAuth.instance.signOut();
+            Navigator.pushNamed(context, WelcomeScreen.routeName);
           },
-          child: Text("Retour en arrière"),
+          child: Text("Se déconnecter"),
         ),
       ],
     );
