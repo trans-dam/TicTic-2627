@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../welcome/welcome_screen.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -11,10 +14,11 @@ class Settings extends StatelessWidget {
         Center(child: Text("On est sur l’écran settings..")),
         ElevatedButton(
           onPressed: () {
-            Navigator.pop(context);
+            FirebaseAuth.instance.signOut();
+            Navigator.pushNamed(context, WelcomeScreen.routeName);
           },
-          child: Text("Retour en arrière"),
-        ),
+          child: Text("Se déconnecter"),
+        )
       ],
     );
   }

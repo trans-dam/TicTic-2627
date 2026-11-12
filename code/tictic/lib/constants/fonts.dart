@@ -80,3 +80,8 @@ const kTextDiverStyle = TextStyle(
 const kInfoIconSize = 15.0;
 
 
+const kTagStyle = TextStyle(
+  color: kSecondaryColor,
+  fontWeight: FontWeight.w600,
+  fontSize: 14,
+);

@@ -1,25 +1,44 @@
+import 'package:dto/Team.dart';
+import 'package:dto/schema.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firestore_odm/firestore_odm.dart';
 import 'package:flutter/material.dart';
-import 'package:tictic/screens/welcome/welcome_screen.dart';
+import 'package:tictic/constants/sizes.dart';
+import 'package:tictic/widgets/team_overview.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final db = FirestoreODM(appSchema);
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(child: Text("On est sur l’écran main..")),
-        Center(child: Text(FirebaseAuth.instance.currentUser!.email ?? 'Rien')),
-        ElevatedButton(
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.pushNamed(context, WelcomeScreen.routeName);
-          },
-          child: Text("Se déconnecter"),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kHorizontalPaddingS),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(FirebaseAuth.instance.currentUser!.email!),
+          Expanded(
+            child: FirestoreBuilder<List<Team>>(
+              ref: db.usersTeams(FirebaseAuth.instance.currentUser!.email!),
+              builder: (context, snapshot, child) {
+                if (snapshot.hasError) return Text('Erreur : ${snapshot.error}');
+                if (!snapshot.hasData) return const CircularProgressIndicator();
+                return ListView(
+                  children: [for (final team in snapshot.data!) TeamOverview(team: team, db: db)],
+                );
+              },
+            ),
+          ),
+
+        ],
+      ),
     );
   }
 }
